@@ -2,6 +2,7 @@
 variable "project_name" {
   description = "Name of the Azure DevOps project"
   type        = string
+  default     = "My Terraform Project"
 }
 
 variable "project_description" {
@@ -19,13 +20,6 @@ variable "project_visibility" {
 variable "repo_name" {
   description = "Name of the new repository"
   type        = string
-}
-variable "azuredevops_org_url" { 
-  type        = string
-  default     = "https://dev.azure.com/bondilikusumakumari"
+  default     = "My Terraform Repo"
 }
 
-variable "azuredevops_pat" { 
-  type        = string
-  default     = "ApwmZQUcvT7WecLpMncxgRqN3ug24BxRu3wxgszz7smKo0ngL9tSJQQJ99BGACAAAAAAAAAAAAASAZDOeDOm"
-}
