@@ -1,0 +1,28 @@
+trigger: none  # Manual or invoked from a release pipeline
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+stages:
+  - stage: Terraform
+    displayName: 'Terraform Plan and Apply'
+    jobs:
+      - job: Terraform_Run
+        displayName: 'Plan & Apply'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              curl -fsSL -o terraform.zip https://releases.hashicorp.com/terraform/1.8.3/terraform_1.8.3_linux_amd64.zip
+              unzip terraform.zip
+              sudo mv terraform /usr/local/bin/
+            displayName: 'Install Terraform'
+
+          - script: |
+              terraform init -reconfigure
+              terraform plan -out=tfplan
+            displayName: 'Terraform Init & Plan'
+
+          - script: terraform apply -auto-approve tfplan
+            displayName: 'Terraform Apply'
